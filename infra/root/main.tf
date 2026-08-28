@@ -56,3 +56,15 @@ module "linux-vm" {
   nic_id   = module.NICs.NIC_id
   rgname   = module.rg.rg_name
 }
+
+module "storage_account" {
+  source = "../modules/storage_account"
+  storage_details = var.storage_details
+  rgname = module.rg.rg_name
+}
+
+module "blob_container" {
+  source = "../modules/blob_container"
+  blob_container = var.blob_container
+  storage_id = module.storage_account.storage_id
+}

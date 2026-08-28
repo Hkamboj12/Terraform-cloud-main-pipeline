@@ -47,3 +47,11 @@ variable "nsg_rule" {
 variable "nic_nsg_assocation" {
   description = "This is used for nic and nsg"
 }
+
+variable "storage_details" {
+  description = "This is used to enter the storage account details"
+}
+
+variable "blob_container" {
+    description = "This variable is used to create the blob container inside the storage account"
+}
