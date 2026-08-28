@@ -4,5 +4,5 @@ variable "windows_server" {
 variable "rgname" {
 }
 
-variable "nic_id" { 
+variable "nic_id" {
 }

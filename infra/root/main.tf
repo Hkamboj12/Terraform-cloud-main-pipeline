@@ -22,6 +22,19 @@ module "public_ip" {
   rgname    = module.rg.rg_name
 }
 
+module "NSG" {
+  source = "../modules/Network_security_group"
+  network_security_group = var.network_security_group
+  rgname = module.rg.rg_name
+}
+
+module "NSG_Rule" {
+  source = "../modules/network_security_rule"
+  nsg_rule = var.nsg_rule
+  nsg_name = module.NSG.nsg_name
+  rgname = module.rg.rg_name
+}
+
 module "NICs" {
   source       = "../modules/Network_interface_card"
   NIC_details  = var.NIC_details
@@ -30,9 +43,16 @@ module "NICs" {
   public_ip_id = module.public_ip.pub_ip_id
 }
 
-module "windows-server" {
-  source =   "../modules/windows_server"
-  windows_server = var.windows_server
-  nic_id = module.NICs.NIC_id
-  rgname = module.rg.rg_name
+module "NIC_NSG_Assocation" {
+  source = "../modules/NSG_NIC_Association"
+  nic_nsg_assocation =   var.nic_nsg_assocation
+  nsg_id = module.NSG.nsg_id
+  NIC_id = module.NICs.NIC_id
+}
+
+module "linux-vm" {
+  source   = "../modules/linux_vm"
+  linux_vm = var.linux_vm
+  nic_id   = module.NICs.NIC_id
+  rgname   = module.rg.rg_name
 }

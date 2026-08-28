@@ -32,5 +32,18 @@ variable "NIC_details" {
   description = "This is used to provide the NIC details"
 }
 
-variable "windows_server" {
+variable "linux_vm" {
+  description = "This is used to provide the VM details"
+}
+
+variable "network_security_group" {
+  description = " This is used to NSG for application"
+}
+
+variable "nsg_rule" {
+  description = " This variable is for nsg rules"
+}
+
+variable "nic_nsg_assocation" {
+  description = "This is used for nic and nsg"
 }
